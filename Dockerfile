@@ -35,6 +35,12 @@ RUN apk update && apk add --no-cache \
     icu-dev \
     libzip-dev \
     icu-dev libzip-dev \
+    imagemagick \
+    imagemagick-dev \
+    $PHPIZE_DEPS \
+    && echo "" | pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && apk del $PHPIZE_DEPS \
     && docker-php-ext-install intl zip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install bcmath gd \
