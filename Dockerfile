@@ -38,9 +38,12 @@ RUN apk update && apk add --no-cache \
     imagemagick \
     imagemagick-dev \
     $PHPIZE_DEPS \
+    $PHPIZE_DEPS linux-headers \
     && echo "" | pecl install imagick \
+    && echo "" | pecl install xdebug \
     && docker-php-ext-enable imagick \
     && apk del $PHPIZE_DEPS \
+    && docker-php-ext-enable xdebug \
     && docker-php-ext-install intl zip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install bcmath gd \
